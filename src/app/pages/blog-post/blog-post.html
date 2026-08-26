@@ -1,0 +1,6 @@
+<div *ngIf="loading()">Loading...</div>
+<div *ngIf="!loading()">
+  <h1>{{ title() }}</h1>
+  <p>By {{ author() }} — {{ publishDate() }}</p>
+  <div [innerHTML]="body()"></div>
+</div>

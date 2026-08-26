@@ -1,0 +1,26 @@
+<div *ngIf="loading()">Loading...</div>
+<div *ngIf="!loading()">
+  <h1>Contact</h1>
+  <p>{{ intro() }}</p>
+
+  <p *ngIf="successMessage()" class="form-success">{{ successMessage() }}</p>
+  <p *ngIf="errorMessage()" class="form-error">{{ errorMessage() }}</p>
+
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label>Name</label>
+      <input type="text" name="name" [(ngModel)]="name" required />
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="email" required />
+    </div>
+    <div>
+      <label>Message</label>
+      <textarea name="message" rows="5" [(ngModel)]="message" required></textarea>
+    </div>
+    <button type="submit" [disabled]="submitting()">
+      {{ submitting() ? 'Sending...' : 'Send Message' }}
+    </button>
+  </form>
+</div>

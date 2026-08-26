@@ -1,0 +1,16 @@
+@if (loading()) {
+  <div>Loading...</div>
+} @else {
+  <div class="hero">
+    <h1>{{ title() }}</h1>
+    @if (isMergedSite()) {
+      <span class="site-badge">Migrated from: {{ siteName() }}</span>
+    }
+  </div>
+
+  <div [innerHTML]="body()"></div>
+
+  @if (isMergedSite() && legacyUrl()) {
+    <p class="legacy-url">Original URL: <code>{{ legacyUrl() }}</code></p>
+  }
+}

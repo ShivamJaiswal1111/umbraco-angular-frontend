@@ -1,0 +1,65 @@
+@if (loading()) {
+  <div>Loading...</div>
+} @else {
+  <h1>Blog</h1>
+  <p>{{ intro() }}</p>
+
+  <div class="create-post-panel">
+    <h3>Add a New Post</h3>
+    <form (ngSubmit)="onCreatePost()" class="create-post-form">
+      <input
+        type="text"
+        placeholder="Title"
+        [ngModel]="title()"
+        (ngModelChange)="title.set($event)"
+        name="title"
+        required
+      />
+
+      <input
+        type="text"
+        placeholder="Author"
+        [ngModel]="author()"
+        (ngModelChange)="author.set($event)"
+        name="author"
+        required
+      />
+
+      <input
+        type="date"
+        [ngModel]="publishDate()"
+        (ngModelChange)="publishDate.set($event)"
+        name="publishDate"
+        required
+      />
+
+      <textarea
+        placeholder="Body"
+        [ngModel]="body()"
+        (ngModelChange)="body.set($event)"
+        name="body"
+        required
+      ></textarea>
+
+      <button type="submit">Create Post</button>
+
+      @if (successMessage()) {
+        <p class="success-msg">{{ successMessage() }}</p>
+      }
+      @if (errorMessage()) {
+        <p class="error-msg">{{ errorMessage() }}</p>
+      }
+    </form>
+  </div>
+
+  <h3 class="posts-heading">All Posts</h3>
+  @for (post of posts(); track post.id) {
+    <div class="blog-card">
+      <h2>
+        <a [routerLink]="getPostLink(post)">
+          {{ post.properties?.title || post.name }}
+        </a>
+      </h2>
+    </div>
+  }
+}
